@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: spiksee3.github.io
+Token: e724d3422498e11566542d97505957f1d8fba17f305b6a7062a4ef462a6dca9e
