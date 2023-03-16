@@ -19,4 +19,4 @@ function FindProxyForURL(url, host) {
     // If the user has entered something that looks like an IP address, go direct
     reip = /^\d+\.\d+\.\d+\.\d+$/g;
     if (reip.test(host)) {
-    if (isInNet(host, "10
+    if (isInNet(host, "10.0.0", "255.0.0.0") || isInNet(host, "172.16.0.0", "255.240.0.0") || isInNet(host, "192.168.0.0", "255.255.0.0")) { return "DIRECT"; } } // Default to using the eduProxy for all other requests return "PROXY 10.122.0.19:8080"; }
