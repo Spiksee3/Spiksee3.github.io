@@ -8,7 +8,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         body {
-            background-color: lightblue;
+            background-color: #add8e6;
         }
         .button {
             background-image: url('croc-tooth.png');
@@ -87,9 +87,10 @@
                         $("#player1wins").text(wins);
                     }
                 } else {
-                    $(this).css("background-image", "url('empty.png')");
+                    $(this).css("background-image", "url('croc-tooth-selected.png')");
+                    $(this).prop('disabled', true);
                     currentPlayer = (currentPlayer == player1) ? player2 : player1;
-                    $("#turn").text(currentPlayer + "'s turn");
+                    $("#turn").text(currentPlayer + " turn");
                 }
             });
         }
@@ -110,6 +111,10 @@
             // Display player names next to win counter
             $("#player1nameDisplay").text(player1);
             $("#player2nameDisplay").text(player2);
+            
+           // Reset button visibility
+           $(".button").removeClass("invisible");
+           $(".button").prop('disabled', false);
         }
 
         function retryGame() {
