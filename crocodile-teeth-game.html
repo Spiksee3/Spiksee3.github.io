@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crocodile Teeth Game</title>
+    <link href="Favicon.png" rel="shortcut icon" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="mystyles.css" />
+	<script data-ad-client="ca-pub-9970429323859227" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body {
+            background-color: lightblue;
+        }
+        .button {
+            background-image: url('croc-tooth.png');
+            height: 50px;
+            width: 50px;
+            border: none;
+        }
+        #gameover {
+            display: none;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Crocodile Teeth Game</h1>
+    <div id="players">
+        Player 1 name: <input type="text" id="player1name" value="">
+        Player 2 name: <input type="text" id="player2name" value="">
+        <button onclick="startGame()">Start Game</button>
+    </div>
+    <div id="game" style="display:none;">
+        <div id="turn"></div>
+        <div id="buttons">
+            <button class="button" id="1"></button>
+            <button class="button" id="2"></button>
+            <button class="button" id="3"></button>
+            <button class="button" id="4"></button>
+            <button class="button" id="5"></button>
+            <button class="button" id="6"></button>
+            <button class="button" id="7"></button>
+            <button class="button" id="8"></button>
+            <button class="button" id="9"></button>
+            <button class="button" id="10"></button>
+            <button class="button" id="11"></button>
+            <button class="button" id="12"></button>
+            <button class="button" id="13"></button>
+        </div>
+
+        <div id="gameover">
+            <h2>Game Over</h2>
+            <button onclick="retryGame()">Retry</button>
+        </div>
+
+        <div id="wincounter">
+            Wins:<br/>
+            <span id="player1nameDisplay"></span>: <span id="player1wins">0</span><br/>
+            <span id="player2nameDisplay"></span>: <span id="player2wins">0</span><br/>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var player1, player2, currentPlayer, number;
+
+        function startGame() {
+            player1 = $("#player1name").val() || "playername1";
+            player2 = $("#player2name").val() || "playername2";
+            
+            $("#players").hide();
+            
+            resetGame();
+            
+            $("#game").show();
+            
+            $(".button").click(function() {
+                var choice = $(this).attr('id');
+                if (choice == number) {
+                    $("body").css("background-color", "black");
+                    $("#buttons").hide();
+                    $("#gameover").show();
+                    if (currentPlayer == player1) {
+                        var wins = parseInt($("#player2wins").text()) + 1;
+                        $("#player2wins").text(wins);
+                    } else {
+                        var wins = parseInt($("#player1wins").text()) + 1;
+                        $("#player1wins").text(wins);
+                    }
+                } else {
+                    $(this).css("background-image", "url('empty.png')");
+                    currentPlayer = (currentPlayer == player1) ? player2 : player1;
+                    $("#turn").text(currentPlayer + "'s turn");
+                }
+            });
+        }
+
+        function resetGame() {
+            currentPlayer = player1;
+            number = Math.floor(Math.random() * 13) + 1;
+            
+            $(".button").css("background-image", "url('croc-tooth.png')");
+            
+            $("#turn").text(currentPlayer + " turn");
+            
+            $("#buttons").show();
+            $("#gameover").hide();
+            
+            $("body").css("background-color", "lightblue");
+            
+            // Display player names next to win counter
+            $("#player1nameDisplay").text(player1);
+            $("#player2nameDisplay").text(player2);
+        }
+
+        function retryGame() {
+          resetGame();
+          $("#gameover").hide();
+          $("#buttons").show();
+        }
+    </script>
+
+</body>
+</html>
